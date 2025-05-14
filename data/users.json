@@ -1,0 +1,14 @@
+[
+  {
+    "id": "admin-1",
+    "name": "Erico Samuel",
+    "email": "admin@agencia.com",
+    "role": "admin"
+  },
+  {
+    "id": "89cd6e92-6756-4608-8418-0fe16144dffe",
+    "name": "ESA - Escola Superior de Advocacia Orlando Gomes",
+    "email": "esa@agencia.com",
+    "role": "client"
+  }
+]
