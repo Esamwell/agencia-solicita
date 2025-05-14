@@ -372,20 +372,32 @@ chown -R $SUDO_USER:$SUDO_USER $BASE_DIR
 print_success "Permissões configuradas!"
 
 # Configurar repositórios
-print_section "Código Fonte" "Configurando repositórios..."
+print_section "Código Fonte" "Clonando e organizando o projeto automaticamente..."
 
-# Solicitar URLs dos repositórios
-echo -e "\n${BOLD}${YELLOW}${WARNING} URLs dos Repositórios${NC}"
-read -p "URL do repositório frontend (ex: https://github.com/seu-usuario/hubsa2-frontend.git): " FRONTEND_REPO
-read -p "URL do repositório backend (ex: https://github.com/seu-usuario/hubsa2-backend.git): " BACKEND_REPO
+# Limpar diretórios antigos, se existirem
+rm -rf $SYSTEM_DIR/*
+rm -rf $API_DIR/*
 
-print_step "Clonando repositório frontend..."
-git clone $FRONTEND_REPO $SYSTEM_DIR
-check_command "Frontend clonado com sucesso" "Erro ao clonar frontend"
+# URL fixa do repositório
+REPO_URL="https://github.com/Esamwell/agencia-solicita.git"
 
-print_step "Clonando repositório backend..."
-git clone $BACKEND_REPO $API_DIR
-check_command "Backend clonado com sucesso" "Erro ao clonar backend"
+print_step "Clonando repositório completo..."
+git clone $REPO_URL /tmp/agencia-solicita
+check_command "Repositório clonado com sucesso" "Erro ao clonar repositório"
+
+print_step "Copiando arquivos para o frontend..."
+cp -r /tmp/agencia-solicita/* $SYSTEM_DIR/
+check_command "Arquivos do frontend copiados" "Erro ao copiar arquivos do frontend"
+
+print_step "Copiando arquivos para o backend..."
+cp -r /tmp/agencia-solicita/* $API_DIR/
+check_command "Arquivos do backend copiados" "Erro ao copiar arquivos do backend"
+
+# Limpar diretório temporário
+test -d /tmp/agencia-solicita && rm -rf /tmp/agencia-solicita
+
+chown -R $SUDO_USER:$SUDO_USER $SYSTEM_DIR
+chown -R $SUDO_USER:$SUDO_USER $API_DIR
 
 # Configurar variáveis de ambiente
 print_section "Configuração" "Configurando variáveis de ambiente..."
