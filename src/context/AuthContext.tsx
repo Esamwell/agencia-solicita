@@ -3,9 +3,7 @@ import { User } from "@/types";
 import { v4 as uuidv4 } from "uuid";
 import { useToast } from "@/components/ui/use-toast";
 import { useRequests } from "./RequestContext";
-
-// API base URL
-const API_BASE_URL = 'http://localhost:3001/api';
+import { API_BASE_URL } from "@/config/api";
 
 // Interface para usuário com senha (apenas para autenticação)
 interface UserWithPassword extends User {

@@ -3,9 +3,7 @@ import { useAuth } from "./AuthContext";
 import { Request, RequestStatus, RequestType, Comment } from "@/types";
 import { v4 as uuidv4 } from "uuid";
 import { toast } from "@/components/ui/use-toast";
-
-// API base URL
-const API_BASE_URL = 'http://localhost:3001/api';
+import { API_BASE_URL } from "@/config/api";
 
 interface RequestContextType {
   requests: Request[];
